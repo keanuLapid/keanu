@@ -1,0 +1,53 @@
+﻿@page
+@model KeanuLapid.Pages.IndexModel
+
+<div class="text-center">
+    @{
+        if (Model.DataResult != null)
+        {
+            if (Model.DataResult.Spacecrafts != null && Model.DataResult.Spacecrafts.Any())
+            {
+                <h1 class="display-4">Spacecraft Information</h1>
+                <h2>Total Spacecrafts: @Model.DataResult.Spacecrafts.Count</h2>
+
+                <div>
+                    @foreach (var spacecraft in Model.DataResult.Spacecrafts)
+                    {
+                        <div>                                                                           
+                            <p>
+                                @if (!string.IsNullOrEmpty(spacecraft.Name))
+                                {
+                                    <strong>Spacecraft Name:</strong> @spacecraft.Name <br />
+                                }
+                                @if (!string.IsNullOrEmpty(spacecraft.Registry))
+                                {
+                                    <strong>Registry:</strong> @spacecraft.Registry <br />
+                                }
+                                @if (!string.IsNullOrEmpty(spacecraft.Status))
+                                {
+                                    <strong>Status:</strong> @spacecraft.Status <br />
+                                }
+                                @if (!string.IsNullOrEmpty(spacecraft.DateStatus))
+                                {
+                                    <strong>Date Status:</strong> @spacecraft.DateStatus <br />
+                                }
+                                @if (spacecraft.SpacecraftClass != null && !string.IsNullOrEmpty(spacecraft.SpacecraftClass.Name) && spacecraft.SpacecraftClass.Name != "N/A" && spacecraft.SpacecraftClass.Name != "?")
+                                {
+                                    <strong>Class:</strong> @spacecraft.SpacecraftClass.Name <br />
+                                }
+                            </p>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <h2>No spacecraft data available</h2>
+            }
+        }
+        else
+        {
+            <h2>No data available</h2>
+        }
+    }
+</div>
